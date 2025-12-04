@@ -1,4 +1,3 @@
- feature/odochi
 locals {
   name = "sock-shop"
 }
@@ -24,6 +23,8 @@ module "ansible" {
   keypair_name        = module.vpc.keypair_name
   private_key         = module.vpc.private_key
   bastion_sg      = module.bastion.bastion_sg
+}
+
 # VPC Module
 module "vpc" {
   source = "./module/vpc"
