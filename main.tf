@@ -26,3 +26,15 @@ module "bastion" {
   key_name    = module.vpc.keypair_name
   private_key = module.vpc.private_key
 }
+
+
+# worker-node Module
+module "worker_node" {
+  source = "./module/worker-node"
+
+  name               = "k8s_team1"
+  vpc_id             = module.vpc.vpc_id
+  private_subnet_ids  = module.vpc.private_subnet_ids
+  key_name           = module.vpc.keypair_name
+}
+
