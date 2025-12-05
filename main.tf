@@ -1,4 +1,3 @@
- feature/odochi
 locals {
   name = "sock-shop"
 }
