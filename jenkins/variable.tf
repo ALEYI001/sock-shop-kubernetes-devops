@@ -8,9 +8,9 @@ variable "domain_name" {
 }
 
 variable "newrelic_api_key" {
-  default = ""
+  default = "NRAK-V5EJ7RVCNJLCQ3NM52B4P79DJ2L"
 }
 
 variable "newrelic_account_id" {
-  default = ""
+  default = "6853055"
 }

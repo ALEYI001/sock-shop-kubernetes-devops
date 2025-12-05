@@ -2,9 +2,9 @@
 set -euo pipefail  # Enable strict error handling
 
 # Set Variables
-BUCKET_NAME="sock-shop-bucket"
+BUCKET_NAME="sock-shop-team33"
 AWS_REGION="us-east-1"
-AWS_PROFILE="pet_team"
+AWS_PROFILE="sock_shop"
 
 # Function to handle errors
 handle_error() {
@@ -12,7 +12,7 @@ handle_error() {
     exit 1
 }
 
-cd utility
+cd jenkins
 echo "Destroying utility infrastructure..."
 terraform destroy -auto-approve
 TF_EXIT_CODE=$?

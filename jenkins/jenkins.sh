@@ -43,19 +43,6 @@ sudo yum install -y unzip
 unzip awscliv2.zip
 sudo ./aws/install
 
-# install trivy
-sudo tee /etc/yum.repos.d/trivy.repo << 'EOF'
-[trivy]
-name=Trivy repository
-baseurl=https://get.trivy.dev/rpm/releases/$basearch/
-gpgcheck=1
-enabled=1
-gpgkey=https://get.trivy.dev/rpm/public.key
-EOF
-
-sudo yum -y update
-sudo yum -y install trivy
-
 # install newrelic infrastructure agent
 curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash && \
 sudo NEW_RELIC_API_KEY="${newrelic_api_key}" \
