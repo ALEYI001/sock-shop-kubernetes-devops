@@ -1,6 +1,6 @@
 #Team name and project title
 locals {
-  name = "utility"
+  name = "utility2"
 }
 # Create a default VPC for vault server
 resource "aws_vpc" "vpc" {
