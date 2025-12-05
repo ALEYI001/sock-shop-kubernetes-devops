@@ -14,10 +14,6 @@ data "aws_ami" "ubuntu" {
   }
 }
 
-# Get a list of the first three Availability Zones in the region
-data "aws_availability_zones" "available" {
-  state = "available"
-}
 
 # Create Security Group for Worker Nodes
 
@@ -32,7 +28,7 @@ resource "aws_security_group" "worker_nodes_sg" {
     from_port   = 10250
     to_port     = 10250
     protocol    = "tcp"
-    cidr_blocks = [aws_vpc.vpc.cidr_block]
+    cidr_blocks = "10.0.0.0/16"
   }
 
   # Ingress Rule 2: Kube-proxy metrics/health check (10256)
@@ -41,7 +37,7 @@ resource "aws_security_group" "worker_nodes_sg" {
     from_port   = 10256
     to_port     = 10256
     protocol    = "tcp"
-    cidr_blocks = [aws_vpc.vpc.cidr_block]
+    cidr_blocks = "10.0.0.0/16"
   }
 
   # Ingress Rule 3: CNI Overlay Network (VXLAN) - UDP
@@ -50,7 +46,7 @@ resource "aws_security_group" "worker_nodes_sg" {
     from_port   = 4789
     to_port     = 4789
     protocol    = "udp"
-    cidr_blocks = [aws_vpc.vpc.cidr_block]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   # Ingress Rule 4: Cluster DNS (CoreDNS) - UDP
@@ -59,7 +55,7 @@ resource "aws_security_group" "worker_nodes_sg" {
     from_port   = 53
     to_port     = 53
     protocol    = "udp"
-    cidr_blocks = [aws_vpc.vpc.cidr_block]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   # Ingress Rule 5: NodePort Services (30000-32767)
@@ -77,7 +73,7 @@ resource "aws_security_group" "worker_nodes_sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    security_groups = [var.bastion_sg, var.ansible_sg]
   }
 
   # Egress Rule: Allow all outbound traffic (Needed for image pulls/updates)

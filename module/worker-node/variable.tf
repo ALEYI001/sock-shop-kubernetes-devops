@@ -13,3 +13,12 @@ variable "vpc_id" {
 variable "private_subnet_ids" {
   type = list(string)
 }
+
+variable "bastion_sg" {
+  description = "Security Group ID of the Bastion Host"
+  type        = string
+}
+variable "ansible_sg" {
+  description = "Security Group ID of the Ansible Control Node"
+  type        = string
+}
