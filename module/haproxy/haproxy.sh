@@ -1,15 +1,14 @@
 #!/bin/bash
 set -e
 
+sudo -i
 apt-get update -y
 apt-get upgrade -y
-
-apt-get install -y --no-install-recommends software-properties-common
+apt install --no-install-recommends software-properties-common
 add-apt-repository ppa:vbernat/haproxy-2.4 -y
-apt-get update -y
-apt-get install -y haproxy=2.4.*
+apt install haproxy=2.4.\* -y 
 
-cat <<CONFIG > /etc/haproxy/haproxy.cfg
+sudo bash -c 'echo "
 frontend fe-apiserver
     bind 0.0.0.0:6443
     mode tcp
@@ -25,11 +24,9 @@ backend be-apiserver
 
     server master1 ${master_ip_1}:6443 check
     server master2 ${master_ip_2}:6443 check
-    server master3 ${master_ip_3}:6443 check
-CONFIG
+    server master3 ${master_ip_3}:6443 check" > /etc/haproxy/haproxy.cfg'
 
 systemctl restart haproxy
 systemctl enable haproxy
 
 hostnamectl set-hostname ha-lb-$(hostname | tail -c 2)
-

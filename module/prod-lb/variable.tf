@@ -1,4 +1,5 @@
 variable "name" {}
-variable "vpc_id" {}
-variable "public_subnets" {}
 variable "domain_name" {}
+variable "vpc_id" {}
+variable "worker_instance_ids" {}
+variable "subnets" {}
