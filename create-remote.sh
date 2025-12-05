@@ -2,9 +2,9 @@
 set -euo pipefail  # Enable strict error handling
 
 # Set Variables
-BUCKET_NAME="sock-shop-bucket"
+BUCKET_NAME="sock-shop-team33"
 AWS_REGION="us-east-1"
-PROFILE="pet_team"
+PROFILE="sock_shop"
 
 # Function to handle errors
 handle_error() {
@@ -41,7 +41,7 @@ echo "🌍 S3 Bucket: $BUCKET_NAME"
 
 # # provision the vault and jenkins server
 # echo "🚀 Provisioning Vault and Jenkins server..."
-# cd utility
+# cd jenkins
 # terraform init -reconfigure
 # terraform fmt -recursive
 # terraform apply -auto-approve
