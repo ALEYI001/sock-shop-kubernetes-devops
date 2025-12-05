@@ -75,7 +75,7 @@ resource "aws_lb_target_group" "stage" {
     healthy_threshold   = 3
     unhealthy_threshold = 2
     protocol            = "HTTP"
-    port                = "traffic-port"
+    port        = "30001"
   }
 
   tags = {
