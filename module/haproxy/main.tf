@@ -40,22 +40,15 @@ resource "aws_instance" "haproxy" {
   count         = 2
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.medium"
-
   subnet_id = var.private_subnet_ids[count.index]
   key_name  = var.key_name
-
   vpc_security_group_ids = [aws_security_group.haproxy_sg.id]
-
   user_data = templatefile("${path.module}/haproxy.sh", {
     master_ip_1 = var.master_private_ips[0]
     master_ip_2 = var.master_private_ips[1]
     master_ip_3 = var.master_private_ips[2]
   })
-
   tags = {
     Name = "${var.name}-haproxy-${count.index + 1}"
-    Role = "haproxy"
   }
 }
-
-

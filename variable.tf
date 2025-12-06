@@ -1,14 +1,11 @@
-variable "key_name" {
+variable "region" {
   type        = string
-  description = "Name of the EC2 key pair to use for instances"
+  description = "The AWS region to create resources in"
+  default     = "us-east-1"
 }
 
-variable "master_private_ips" {
-  type        = list(string)
-  description = "List of private IP addresses for the Kubernetes master nodes"
-  
-  validation {
-    condition     = length(var.master_private_ips) == 3
-    error_message = "Must provide exactly 3 master node private IP addresses."
-  }
+variable "domain_name" {
+  type        = string
+  description = "The domain name for the load balancer"
+  default = "work-experience2025.buzz"
 }

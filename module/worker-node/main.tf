@@ -20,7 +20,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_security_group" "worker_nodes_sg" {
   name        = "${var.name}-worker-nodes-sg"
   description = "Security group for Kubernetes Worker Nodes"
-  vpc_id      = var.vpc.id
+  vpc_id      = var.vpc_id
 
   # Ingress Rule 1: Kubelet API (10250)
   ingress {
@@ -28,7 +28,7 @@ resource "aws_security_group" "worker_nodes_sg" {
     from_port   = 10250
     to_port     = 10250
     protocol    = "tcp"
-    cidr_blocks = "10.0.0.0/16"
+    cidr_blocks = ["10.0.0.0/16"]
   }
 
   # Ingress Rule 2: Kube-proxy metrics/health check (10256)
@@ -37,7 +37,7 @@ resource "aws_security_group" "worker_nodes_sg" {
     from_port   = 10256
     to_port     = 10256
     protocol    = "tcp"
-    cidr_blocks = "10.0.0.0/16"
+    cidr_blocks = ["10.0.0.0/16"]
   }
 
   # Ingress Rule 3: CNI Overlay Network (VXLAN) - UDP
@@ -98,16 +98,7 @@ resource "aws_instance" "worker_node" {
   subnet_id = var.private_subnet_ids[count.index]
   key_name  = var.key_name
   vpc_security_group_ids = [aws_security_group.worker_nodes_sg.id]
-  
   tags = {
       Name = "${var.name}-worker-node-${count.index + 1}"
-    }
-
+  }
 }
-
-
-
-
-
-
-

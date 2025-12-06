@@ -13,8 +13,8 @@ data "aws_acm_certificate" "cert" {
 
 # Security Group for the ALB
 resource "aws_security_group" "lb_sg" {
-  name        = "${var.name}-graf-lb-sg"
-  description = "Security group forgraf ALB"
+  name        = "${var.name}-prom-lb-sg"
+  description = "Security group forprom ALB"
   vpc_id      = var.vpc_id
 
   # HTTPS
@@ -34,27 +34,27 @@ resource "aws_security_group" "lb_sg" {
   }
 
   tags = {
-    Name = "${var.name}-graf-lb-sg"
+    Name = "${var.name}-prom-lb-sg"
   }
 }
 
-# ALB- graf app lb
-resource "aws_lb" "graf" {
-  name                       = "${var.name}-graf-alb"
+# ALB- prom app lb
+resource "aws_lb" "prom" {
+  name                       = "${var.name}-prom-alb"
   load_balancer_type         = "application"
   security_groups            = [aws_security_group.lb_sg.id]
   subnets                    = var.subnets
   enable_deletion_protection = false
   tags = {
-    Name = "${var.name}-graf-alb"
+    Name = "${var.name}-prom-alb"
   }
 }
 
 
-# Target Groups (graf)
-resource "aws_lb_target_group" "graf" {
-  name        = "${var.name}-graf-tg"
-  port        = 31300
+# Target Groups (prom)
+resource "aws_lb_target_group" "prom" {
+  name        = "${var.name}-prom-tg"
+  port        = 31090
   protocol    = "HTTP"
   target_type = "instance"
   vpc_id      = var.vpc_id
@@ -66,60 +66,60 @@ resource "aws_lb_target_group" "graf" {
     healthy_threshold   = 3
     unhealthy_threshold = 2
     protocol            = "HTTP"
-    port                = "31300"
+    port                = "31090"
   }
 
   tags = {
-    Name = "${var.name}-graf-tg"
+    Name = "${var.name}-prom-tg"
   }
 }
 
 
 
 # Target Attachments
-# graf attachments (distributes across multiple instances)
-resource "aws_lb_target_group_attachment" "graf" {
+# prom attachments (distributes across multiple instances)
+resource "aws_lb_target_group_attachment" "prom" {
   count            = length(var.worker_instance_ids)
-  target_group_arn = aws_lb_target_group.graf.arn
+  target_group_arn = aws_lb_target_group.prom.arn
   target_id        = var.worker_instance_ids[count.index]
-  port             = 31300
+  port             = 31090
 }
 
 
 
 # Listeners (HTTP redirect, HTTPS forward) HTTP 80 -> HTTPS 443 
 resource "aws_lb_listener" "http" {
-  load_balancer_arn = aws_lb.graf.arn
+  load_balancer_arn = aws_lb.prom.arn
   port              = 80
   protocol          = "HTTP"
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.graf.arn
+    target_group_arn = aws_lb_target_group.prom.arn
   }
 }
 
 # HTTPS 443 (forwards by listener rules below)
 resource "aws_lb_listener" "https" {
-  load_balancer_arn = aws_lb.graf.arn
+  load_balancer_arn = aws_lb.prom.arn
   port              = 443
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
   certificate_arn   = data.aws_acm_certificate.cert.arn
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.graf.arn
+    target_group_arn = aws_lb_target_group.prom.arn
   }
 }
 
 # Route53 records
-resource "aws_route53_record" "graf" {
+resource "aws_route53_record" "prom" {
   zone_id = data.aws_route53_zone.zone.zone_id
-  name    = "graf.${var.domain_name}"
+  name    = "prom.${var.domain_name}"
   type    = "A"
-  # description: Alias record to ALB for graf
+  # description: Alias record to ALB for prom
   alias {
-    name                   = aws_lb.graf.dns_name
-    zone_id                = aws_lb.graf.zone_id
+    name                   = aws_lb.prom.dns_name
+    zone_id                = aws_lb.prom.zone_id
     evaluate_target_health = true
   }
 }
