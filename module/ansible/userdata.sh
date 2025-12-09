@@ -20,5 +20,28 @@ echo "${private_key}" > /home/ubuntu/.ssh/id_rsa
 sudo chmod 400 /home/ubuntu/.ssh/id_rsa
 sudo chown ubuntu:ubuntu /home/ubuntu/.ssh/id_rsa
 
+# pulling playbook from s3 bucket
+aws s3 cp s3://"${s3_bucket_name}"/playbooks /etc/ansible/playbooks --recursive
+
+
+#updating hosts file
+echo "[main-master]" > /etc/ansible/hosts
+echo "${master1_private_ip} ansible_user=ubuntu" >> /etc/ansible/hosts
+echo "[member-master]" >> /etc/ansible/hosts
+echo "${master2_private_ip} ansible_user=ubuntu" >> /etc/ansible/hosts
+echo "${master3_private_ip} ansible_user=ubuntu" >> /etc/ansible/hosts
+echo "[worker-nodes]" >> /etc/ansible/hosts
+echo "${worker1_private_ip} ansible_user=ubuntu" >> /etc/ansible/hosts
+echo "${worker2_private_ip} ansible_user=ubuntu" >> /etc/ansible/hosts
+echo "${worker3_private_ip} ansible_user=ubuntu" >> /etc/ansible/hosts
+echo "[haproxy]" >> /etc/ansible/hosts
+echo "${haproxy1_private_ip} ansible_user=ubuntu" >> /etc/ansible/hosts
+echo "${haproxy2_private_ip} ansible_user=ubuntu" >> /etc/ansible/hosts
+
+# create haproxy group vars file
+echo "haproxy_1: ${haproxy1_private_ip}" > /etc/ansible/haproxy.yml
+echo "haproxy_2: ${haproxy2_private_ip}" >> /etc/ansible/haproxy.yml
+sudo chown -R ubuntu:ubuntu /etc/ansible/
+
 # Set hostname
 sudo hostnamectl set-hostname ansible

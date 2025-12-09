@@ -47,8 +47,18 @@ resource "aws_instance" "ansible_server" {
   vpc_security_group_ids = [aws_security_group.ansible_sg.id]
   subnet_id              = var.subnet_id[0]
   iam_instance_profile = aws_iam_instance_profile.ansible_profile.id
+  depends_on = [aws_s3_object.playbook]
   user_data = templatefile("${path.module}/userdata.sh", {
-    private_key         = var.private_key 
+    private_key         = var.private_key,
+    s3_bucket_name     = var.s3_bucket_name,
+    master1_private_ip      = var.master1,
+    master2_private_ip      = var.master2,
+    master3_private_ip      = var.master3,
+    haproxy1_private_ip      = var.haproxy1,
+    haproxy2_private_ip      = var.haproxy2,
+    worker1_private_ip      = var.worker1,
+    worker2_private_ip      = var.worker2,
+    worker3_private_ip      = var.worker3
   })
 
   root_block_device {
@@ -97,22 +107,10 @@ resource "aws_iam_instance_profile" "ansible_profile" {
 }
 
 # upload Ansible file to S3
-# resource "aws_s3_object" "scripts1" {
-#   bucket = var.s3_bucket_name
-#   key    = "scripts/deployment.yml"
-#   source = "${path.module}/scripts/deployment.yml"
-# }
-
-# upload Ansible file to S3
-# resource "aws_s3_object" "scripts2" {
-#   bucket = var.s3_bucket_name
-#   key    = "scripts/prod_bashscript.sh"
-#   source = "${path.module}/scripts/prod_bashscript.sh"
-# }
-
-# upload Ansible file to S3
-# resource "aws_s3_object" "scripts3" {
-#   bucket = var.s3_bucket_name
-#   key    = "scripts/stage_bashscript.sh"
-#   source = "${path.module}/scripts/stage_bashscript.sh"
-# }
+resource "aws_s3_object" "playbook" {
+  for_each = fileset("${path.module}/playbooks", "*")
+  bucket = var.s3_bucket_name
+  key    = "playbooks/${each.value}"
+  source = "${path.module}/playbooks/${each.value}"
+  etag   = filemd5("${path.module}/playbooks/${each.value}")
+}

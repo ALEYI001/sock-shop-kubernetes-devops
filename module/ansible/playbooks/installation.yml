@@ -7,6 +7,8 @@
   become_user: root
   gather_facts: true
   connection: ssh
+  var_files:
+    - /home/ubuntu/haproxy.yml
 
   tasks:
     - name: Update apt cache
@@ -116,11 +118,16 @@
 
     - name: Initialize Kubernetes control plane (master only)
       shell: |
-        kubeadm init --cri-socket unix:///var/run/cri-dockerd.sock --pod-network-cidr=192.168.0.0/16
+        kubeadm init --cri-socket unix:///var/run/cri-dockerd.sock --pod-network-cidr=192.168.0.0/16 --control-plane-endpoint={{ haproxy_1 }}:6443 --upload-certs    
       when: "'main-master' in group_names"
       register: kubeadm_init
       args:
         warn: false
+        creates: /etc/kubernetes/admin.conf
+
+    - name: Save kubeadm init output to control node (master only)
+      local_action:
+        copy content="{{ kubeadm_init.stdout }}" dest="/tmp/kubeadm-init.out"
 
     - name: Setup kubeconfig for ubuntu user (master only)
       shell: |
@@ -129,13 +136,7 @@
         chown $(id -u):$(id -g) $HOME/.kube/config
       when: "'main-master' in group_names"
 
-    - name: Apply Calico CNI networking (master only)
-      shell: kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.2/manifests/calico.yaml
+    - name: save kubeconfig on ansible from main-master
       when: "'main-master' in group_names"
-
-    - name: Validate Kubernetes cluster (master only)
-      shell: |
-        sleep 20
-        kubectl get nodes
-        kubectl get pods -A
-      when: "'main-master' in group_names"
+      local_action:
+        copy content="{{ lookup('file', '/home/ubuntu/.kube/config') }}" dest="/tmp/kubeconfig"
