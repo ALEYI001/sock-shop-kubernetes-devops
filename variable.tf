@@ -1,8 +1,10 @@
-variable "key_name" {
+variable "region" {
   type        = string
-  description = "Name of the EC2 key pair to use for instances"
+  description = "The AWS region to create resources in"
+  default     = "us-east-1"
 }
 
+<<<<<<< HEAD
 variable "master_private_ips" {
   type        = list(string)
   description = "List of private IP addresses for the Kubernetes master nodes"
@@ -14,4 +16,10 @@ variable "master_private_ips" {
 }
 variable "domain" {
   default = "edenboutique.space"
+=======
+variable "domain_name" {
+  type        = string
+  description = "The domain name for the load balancer"
+  default = "work-experience2025.buzz"
+>>>>>>> d851546e178927a89ebe6dfa545d65c0df0379a4
 }
