@@ -12,3 +12,6 @@ variable "master_private_ips" {
     error_message = "Must provide exactly 3 master node private IP addresses."
   }
 }
+variable "domain" {
+  default = "edenboutique.space"
+}

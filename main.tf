@@ -1,4 +1,4 @@
- feature/odochi
+
 locals {
   name = "sock-shop"
 }
@@ -24,11 +24,11 @@ module "ansible" {
   keypair_name        = module.vpc.keypair_name
   private_key         = module.vpc.private_key
   bastion_sg      = module.bastion.bastion_sg
-# VPC Module
+}
 module "vpc" {
-  source = "./module/vpc"
 
-  name = "k8s_team1"
+  source          = "./module/vpc"
+  name            = local.name
 }
 
 # HAProxy Module
@@ -51,4 +51,12 @@ module "bastion" {
   subnets     = module.vpc.public_subnet_ids
   key_name    = module.vpc.keypair_name
   private_key = module.vpc.private_key
+}
+module "app-lb-stage" {
+  source      = "./module/app-lb-stage"
+  domain_name = var.domain
+  name        = local.name
+  subnets     = module.vpc.public_subnet_ids
+  worker_instance_ids = ""
+  vpc_id = module.vpc.vpc_id
 }
