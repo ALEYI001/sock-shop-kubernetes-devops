@@ -7,7 +7,7 @@
   become_user: root
   gather_facts: true
   connection: ssh
-  var_files:
+  vars_files:
     - /home/ubuntu/haproxy.yml
 
   tasks:
@@ -115,28 +115,3 @@
         systemctl daemon-reload
         systemctl enable cri-docker.service
         systemctl enable --now cri-docker.socket
-
-    - name: Initialize Kubernetes control plane (master only)
-      shell: |
-        kubeadm init --cri-socket unix:///var/run/cri-dockerd.sock --pod-network-cidr=192.168.0.0/16 --control-plane-endpoint={{ haproxy_1 }}:6443 --upload-certs    
-      when: "'main-master' in group_names"
-      register: kubeadm_init
-      args:
-        warn: false
-        creates: /etc/kubernetes/admin.conf
-
-    - name: Save kubeadm init output to control node (master only)
-      local_action:
-        copy content="{{ kubeadm_init.stdout }}" dest="/tmp/kubeadm-init.out"
-
-    - name: Setup kubeconfig for ubuntu user (master only)
-      shell: |
-        mkdir -p $HOME/.kube
-        cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-        chown $(id -u):$(id -g) $HOME/.kube/config
-      when: "'main-master' in group_names"
-
-    - name: save kubeconfig on ansible from main-master
-      when: "'main-master' in group_names"
-      local_action:
-        copy content="{{ lookup('file', '/home/ubuntu/.kube/config') }}" dest="/tmp/kubeconfig"
