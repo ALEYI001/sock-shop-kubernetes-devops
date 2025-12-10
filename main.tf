@@ -25,6 +25,15 @@ module "ansible" {
   keypair_name        = module.vpc.keypair_name
   private_key         = module.vpc.private_key
   bastion_sg          = module.bastion.bastion_sg
+  s3_bucket_name     = var.s3_bucket_name
+  master1 = module.master_node.master_node_instance_ip[0]
+  master2 = module.master_node.master_node_instance_ip[1]
+  master3 = module.master_node.master_node_instance_ip[2]
+  haproxy1 = module.haproxy.haproxy_private_ips[0]
+  haproxy2 = module.haproxy.haproxy_private_ips[1] 
+  worker1 = module.worker_node.worker_instance_ip[0]
+  worker2 = module.worker_node.worker_instance_ip[1]
+  worker3 = module.worker_node.worker_instance_ip[2]
 }
 
 # HAProxy Module
