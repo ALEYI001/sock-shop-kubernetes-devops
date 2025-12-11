@@ -34,14 +34,21 @@ echo "[worker-nodes]" >> /etc/ansible/hosts
 echo "${worker1_private_ip} ansible_user=ubuntu" >> /etc/ansible/hosts
 echo "${worker2_private_ip} ansible_user=ubuntu" >> /etc/ansible/hosts
 echo "${worker3_private_ip} ansible_user=ubuntu" >> /etc/ansible/hosts
-echo "[haproxy]" >> /etc/ansible/hosts
+echo "[haproxy-1]" >> /etc/ansible/hosts
 echo "${haproxy1_private_ip} ansible_user=ubuntu" >> /etc/ansible/hosts
+echo "[haproxy-2]" >> /etc/ansible/hosts
 echo "${haproxy2_private_ip} ansible_user=ubuntu" >> /etc/ansible/hosts
 
 # create haproxy group vars file
 echo "haproxy_1: ${haproxy1_private_ip}" > /etc/ansible/haproxy.yml
 echo "haproxy_2: ${haproxy2_private_ip}" >> /etc/ansible/haproxy.yml
 sudo chown -R ubuntu:ubuntu /etc/ansible/
+
+# Run ansible playbook to setup kubernetes cluster
+ansible-playbook /etc/ansible/playbooks/installation.yml
+ansible-playbook /etc/ansible/playbooks/keepalived.yml
+ansible-playbook /etc/ansible/playbooks/main-master.yml
+
 
 # Set hostname
 sudo hostnamectl set-hostname ansible
