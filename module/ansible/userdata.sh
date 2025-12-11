@@ -6,6 +6,7 @@ sudo apt-get install unzip -y
 sudo apt-get install software-properties-common -y
 sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt-get install ansible -y
+sudo bash -c 'echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config'
 
 # Installing awscli
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -45,9 +46,11 @@ echo "haproxy_2: ${haproxy2_private_ip}" >> /etc/ansible/haproxy.yml
 sudo chown -R ubuntu:ubuntu /etc/ansible/
 
 # Run ansible playbook to setup kubernetes cluster
-ansible-playbook /etc/ansible/playbooks/installation.yml
-ansible-playbook /etc/ansible/playbooks/keepalived.yml
-ansible-playbook /etc/ansible/playbooks/main-master.yml
+sudo su -c "ansible-playbook /etc/ansible/playbooks/installation.yml" ubuntu
+sudo su -c "ansible-playbook /etc/ansible/playbooks/keepalived.yml" ubuntu
+sudo su -c "ansible-playbook /etc/ansible/playbooks/main-master.yml" ubuntu
+sudo su -c "ansible-playbook /etc/ansible/playbooks/join-nodes.yml" ubuntu
+sudo su -c "ansible-playbook /etc/ansible/playbooks/kubectl.yml" ubuntu
 
 
 # Set hostname
