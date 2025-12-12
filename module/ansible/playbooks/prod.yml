@@ -1,6 +1,6 @@
 ---
-- name: Deploy Microservices Application to Production Environment
-  hosts: HAProxy1
+- name: Deploy Microservices Application to prod Environment
+  hosts: haproxy-1
   become: yes
 
   vars:
@@ -11,47 +11,25 @@
 
   tasks:
 
-    - name: Ensure application repository is up-to-date
+    - name: Ensure application repository is up-to-date (prod branch: eu-team-1)
       git:
         repo: "{{ app_repo_url }}"
         dest: "{{ app_repo_path }}"
-        version: main
+        version: eu-team-1
         force: yes
 
-    - name: Delete previous production deployment (safe delete)
+    - name: Delete previous prod deployment (safe delete)
       command: kubectl delete -f prod-complete.yaml --ignore-not-found=true
       args:
         chdir: "{{ deploy_path }}"
       environment:
         KUBECONFIG: "{{ kubeconfig_path }}"
 
-    - name: Apply new production deployment
+    - name: Apply new prod deployment
       command: kubectl apply -f prod-complete.yaml
       args:
         chdir: "{{ deploy_path }}"
       environment:
         KUBECONFIG: "{{ kubeconfig_path }}"
 
-    - name: Extract deployment names from prod-complete.yaml
-      command: >
-        kubectl get -f prod-complete.yaml
-        -o jsonpath="{.items[*].metadata.name}"
-      args:
-        chdir: "{{ deploy_path }}"
-      environment:
-        KUBECONFIG: "{{ kubeconfig_path }}"
-      register: deployment_names
-
-    - name: Verify rollout status for all deployments
-      command: kubectl rollout status deployment/{{ item }}
-      loop: "{{ deployment_names.stdout.split() }}"
-      environment:
-        KUBECONFIG: "{{ kubeconfig_path }}"
-      register: rollout_status
-      until: rollout_status.rc == 0
-      retries: 5
-      delay: 15
-      
-    - name: Display rollout status results
-      debug:
-        var: rollout_status.results
+   
