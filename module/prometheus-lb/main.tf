@@ -60,13 +60,12 @@ resource "aws_lb_target_group" "prom" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path                = "/"
+    path                = "/query"
     interval            = 30
     timeout             = 5
     healthy_threshold   = 3
     unhealthy_threshold = 2
     protocol            = "HTTP"
-    port                = "31090"
   }
 
   tags = {

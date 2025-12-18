@@ -1,7 +1,7 @@
 ---
 - name: Deploy Microservices Application to prod Environment
   hosts: haproxy-1
-  become: yes
+  become: true
 
   vars:
     app_repo_url: "https://github.com/CloudHight/US-Team-Sock-Shop-App-Repo.git"
@@ -11,7 +11,7 @@
 
   tasks:
 
-    - name: Ensure application repository is up-to-date (prod branch: eu-team-1)
+    - name: Ensure application repository is up-to-date
       git:
         repo: "{{ app_repo_url }}"
         dest: "{{ app_repo_path }}"

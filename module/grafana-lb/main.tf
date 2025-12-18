@@ -60,13 +60,12 @@ resource "aws_lb_target_group" "graf" {
   vpc_id      = var.vpc_id
 
   health_check {
-    path                = "/"
+    path                = "/login"
     interval            = 30
     timeout             = 5
     healthy_threshold   = 3
     unhealthy_threshold = 2
     protocol            = "HTTP"
-    port                = "31300"
   }
 
   tags = {
@@ -123,3 +122,6 @@ resource "aws_route53_record" "graf" {
     evaluate_target_health = true
   }
 }
+
+# kubectl get secret -n kube-prometheus-stack kube-prometheus-stack-grafana -o jsonpath='{.data.admin-user}' | base64 --decode
+# kubectl get secret -n kube-prometheus-stack kube-prometheus-stack-grafana -o jsonpath='{.data.admin-password}' | base64 --decode

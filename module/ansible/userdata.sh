@@ -45,13 +45,15 @@ echo "haproxy_1: ${haproxy1_private_ip}" > /etc/ansible/haproxy.yml
 echo "haproxy_2: ${haproxy2_private_ip}" >> /etc/ansible/haproxy.yml
 sudo chown -R ubuntu:ubuntu /etc/ansible/
 
-# Run ansible playbook to setup kubernetes cluster
+# # Run ansible playbook to setup kubernetes cluster
 sudo su -c "ansible-playbook /etc/ansible/playbooks/installation.yml" ubuntu
 sudo su -c "ansible-playbook /etc/ansible/playbooks/keepalived.yml" ubuntu
 sudo su -c "ansible-playbook /etc/ansible/playbooks/main-master.yml" ubuntu
 sudo su -c "ansible-playbook /etc/ansible/playbooks/join-nodes.yml" ubuntu
 sudo su -c "ansible-playbook /etc/ansible/playbooks/kubectl.yml" ubuntu
-
+sudo su -c "ansible-playbook /etc/ansible/playbooks/stage.yml" ubuntu
+sudo su -c "ansible-playbook /etc/ansible/playbooks/prod.yml" ubuntu
+sudo su -c "ansible-playbook /etc/ansible/playbooks/monitoring.yml" ubuntu
 
 # Set hostname
 sudo hostnamectl set-hostname ansible

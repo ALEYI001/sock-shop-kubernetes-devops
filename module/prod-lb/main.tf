@@ -54,7 +54,7 @@ resource "aws_lb" "prod" {
 # Target Groups (prod)
 resource "aws_lb_target_group" "prod" {
   name        = "${var.name}-prod-tg"
-  port        = 30002
+  port        = 30001
   protocol    = "HTTP"
   target_type = "instance"
   vpc_id      = var.vpc_id
@@ -66,7 +66,7 @@ resource "aws_lb_target_group" "prod" {
     healthy_threshold   = 3
     unhealthy_threshold = 2
     protocol            = "HTTP"
-    port                = "30002"
+    port                = "30001"
   }
 
   tags = {
@@ -82,7 +82,7 @@ resource "aws_lb_target_group_attachment" "prod" {
   count            = length(var.worker_instance_ids)
   target_group_arn = aws_lb_target_group.prod.arn
   target_id        = var.worker_instance_ids[count.index]
-  port             = 30002
+  port             = 30001
 }
 
 

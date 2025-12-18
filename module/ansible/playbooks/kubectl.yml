@@ -28,6 +28,7 @@
     - name: Install kubectl using snap
       shell: |
         snap install kubectl --classic
+        
 # Separate play for Weave CNI deployment on haproxy-1 only
 - name: Deploy Weave CNI on haproxy-1
   hosts: haproxy-1
@@ -41,3 +42,4 @@
       become_user: ubuntu
       shell: |
         kubectl apply -f "https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml"
+      when: "'haproxy-1' in group_names"

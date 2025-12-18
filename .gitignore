@@ -4,6 +4,8 @@ sock_shop_accessKeys.csv
 sock_shop_credentials.csv
 *.terraform.*
 *.pem
+.DS_Store
+.vscode
 
 # .tfstate files
 *.tfstate

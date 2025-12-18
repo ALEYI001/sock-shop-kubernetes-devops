@@ -83,6 +83,10 @@ resource "aws_instance" "master_nodes" {
   key_name               = var.key_name
   subnet_id              = element(var.subnet_ids, count.index)
   vpc_security_group_ids = [aws_security_group.master_node_sg.id]
+    root_block_device {
+    volume_size = 30
+    volume_type = "gp3"
+  }
   tags = {
     Name = "${var.name}-k8s-master-${count.index + 1}"
   }

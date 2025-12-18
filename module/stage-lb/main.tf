@@ -54,7 +54,7 @@ resource "aws_lb" "stage" {
 # Target Groups (stage)
 resource "aws_lb_target_group" "stage" {
   name        = "${var.name}-stage-tg"
-  port        = 30001
+  port        = 30000
   protocol    = "HTTP"
   target_type = "instance"
   vpc_id      = var.vpc_id
@@ -66,7 +66,7 @@ resource "aws_lb_target_group" "stage" {
     healthy_threshold   = 3
     unhealthy_threshold = 2
     protocol            = "HTTP"
-    port                = "30001"
+    port                = "30000"
   }
 
   tags = {
@@ -82,7 +82,7 @@ resource "aws_lb_target_group_attachment" "stage" {
   count            = length(var.worker_instance_ids)
   target_group_arn = aws_lb_target_group.stage.arn
   target_id        = var.worker_instance_ids[count.index]
-  port             = 30001
+  port             = 30000
 }
 
 

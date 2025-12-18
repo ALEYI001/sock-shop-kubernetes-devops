@@ -40,6 +40,15 @@ resource "aws_security_group" "worker_nodes_sg" {
     cidr_blocks = ["10.0.0.0/16"]
   }
 
+  # Ingress Rule 2: CNI Overlay Network (Weave Net) - TCP
+  ingress {
+    description = "weave net CNI"
+    from_port   = 6783
+    to_port     = 6784
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+
   # Ingress Rule 3: CNI Overlay Network (VXLAN) - UDP
   ingress {
     description = "CNI VXLAN Overlay (e.g., Flannel, Calico)"
@@ -98,6 +107,10 @@ resource "aws_instance" "worker_node" {
   subnet_id = var.private_subnet_ids[count.index]
   key_name  = var.key_name
   vpc_security_group_ids = [aws_security_group.worker_nodes_sg.id]
+  root_block_device {
+    volume_size = 30
+    volume_type = "gp3"
+  }
   tags = {
       Name = "${var.name}-worker-node-${count.index + 1}"
   }

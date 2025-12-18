@@ -13,9 +13,6 @@
         group: root
         mode: '0777'
 
-    - name: Insert socket url at the back of token
-      shell: sed -i '$ s/$/\ --cri-socket\ unix:\/\/\/var\/run\/cri-dockerd.sock/g' /tmp/join-command
-
     - name: Add new Kubernetes master member
       command: sh /tmp/join-command
 
@@ -39,9 +36,6 @@
         owner: root
         group: root
         mode: '0777'
-
-    - name: Insert socket url at the back of token
-      shell: sed -i '$ s/$/\ --cri-socket\ unix:\/\/\/var\/run\/cri-dockerd.sock/g' /tmp/join-command
 
     - name: Add new Kubernetes worker member
       command: sh /tmp/join-command

@@ -74,7 +74,7 @@ module "stage-lb" {
   domain_name         = var.domain_name
   vpc_id              = module.vpc.vpc_id
   worker_instance_ids = module.worker_node.worker_instance_ids
-  subnets             = [module.vpc.public_subnet_ids[0], module.vpc.public_subnet_ids[1]]
+  subnets             = [module.vpc.public_subnet_ids[0], module.vpc.public_subnet_ids[1], module.vpc.public_subnet_ids[2]]
 }
 
 module "prod-lb" {
@@ -83,7 +83,7 @@ module "prod-lb" {
   domain_name         = var.domain_name
   vpc_id              = module.vpc.vpc_id
   worker_instance_ids = module.worker_node.worker_instance_ids
-  subnets             = [module.vpc.public_subnet_ids[0], module.vpc.public_subnet_ids[1]]
+  subnets             = [module.vpc.public_subnet_ids[0], module.vpc.public_subnet_ids[1], module.vpc.public_subnet_ids[2]]
 }
 
 module "prometheus-lb" {
@@ -92,7 +92,7 @@ module "prometheus-lb" {
   domain_name         = var.domain_name
   vpc_id              = module.vpc.vpc_id
   worker_instance_ids = module.worker_node.worker_instance_ids
-  subnets             = [module.vpc.public_subnet_ids[0], module.vpc.public_subnet_ids[1]]
+  subnets             = [module.vpc.public_subnet_ids[0], module.vpc.public_subnet_ids[1], module.vpc.public_subnet_ids[2]]
 }
 
 module "grafana-lb" {
@@ -101,5 +101,5 @@ module "grafana-lb" {
   domain_name         = var.domain_name
   vpc_id              = module.vpc.vpc_id
   worker_instance_ids = module.worker_node.worker_instance_ids
-  subnets             = [module.vpc.public_subnet_ids[0], module.vpc.public_subnet_ids[1]]
+  subnets             = [module.vpc.public_subnet_ids[0], module.vpc.public_subnet_ids[1], module.vpc.public_subnet_ids[2]]
 }
