@@ -52,7 +52,7 @@ sudo su -c "ansible-playbook /etc/ansible/playbooks/main-master.yml" ubuntu
 sudo su -c "ansible-playbook /etc/ansible/playbooks/join-nodes.yml" ubuntu
 sudo su -c "ansible-playbook /etc/ansible/playbooks/kubectl.yml" ubuntu
 sudo su -c "ansible-playbook /etc/ansible/playbooks/stage.yml" ubuntu
-sudo su -c "ansible-playbook /etc/ansible/playbooks/prod.yml" ubuntu
+# sudo su -c "ansible-playbook /etc/ansible/playbooks/prod.yml" ubuntu
 sudo su -c "ansible-playbook /etc/ansible/playbooks/monitoring.yml" ubuntu
 
 # Set hostname

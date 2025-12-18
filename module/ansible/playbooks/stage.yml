@@ -4,32 +4,39 @@
   become: true
 
   vars:
-    app_repo_url: "https://github.com/CloudHight/US-Team-Sock-Shop-App-Repo.git"
-    app_repo_path: "/home/ubuntu/US-Team-Sock-Shop-App-Repo"
-    deploy_path: "/home/ubuntu/US-Team-Sock-Shop-App-Repo/deploy/kubernetes"
+    app_repo_url: "https://github.com/CloudHight/Sock-Shop-App-Repo.git"
+    app_repo_path: "/home/ubuntu/Sock-Shop-App-Repo"
+    deploy_path: "/home/ubuntu/Sock-Shop-App-Repo/"
     kubeconfig_path: "/home/ubuntu/.kube/config"
 
   tasks:
 
-    - name: Ensure application repository is up-to-date
+    - name: Ensure application repository is present and on stage branch
       git:
         repo: "{{ app_repo_url }}"
         dest: "{{ app_repo_path }}"
-        version: eu-team-1
+        version: stage
         force: yes
+        update: yes
+
+    - name: Ensure stage namespace exists (idempotent)
+      shell: kubectl create namespace stage --dry-run=client -o yaml | kubectl apply -f -
+      args:
+        chdir: "{{ deploy_path }}"
+      environment:
+        KUBECONFIG: "{{ kubeconfig_path }}"
+      ignore_errors: true
 
     - name: Delete previous staging deployment (safe delete)
-      command: kubectl delete -f staging-complete.yaml --ignore-not-found=true
+      command: kubectl delete -f complete.yaml -n stage --ignore-not-found=true
       args:
         chdir: "{{ deploy_path }}"
       environment:
         KUBECONFIG: "{{ kubeconfig_path }}"
 
-    - name: Apply new staging deployment
-      command: kubectl apply -f staging-complete.yaml
+    - name: Apply new staging deployment to stage namespace
+      command: kubectl apply -f complete.yaml -n stage
       args:
         chdir: "{{ deploy_path }}"
       environment:
         KUBECONFIG: "{{ kubeconfig_path }}"
-
-   
