@@ -1,11 +1,14 @@
 # Local .terraform directories
 .terraform/
+<<<<<<< HEAD
 sock_shop_accessKeys.csv
 sock_shop_credentials.csv
 *.terraform.*
 *.pem
 .DS_Store
 .vscode
+=======
+>>>>>>> c5ccb1f9b9499b496f3df2b7b515d6a0c4e1a8c3
 
 # .tfstate files
 *.tfstate
@@ -31,7 +34,10 @@ override.tf.json
 
 # Ignore transient lock info files created by terraform apply
 .terraform.tfstate.lock.info
+<<<<<<< HEAD
 .terraform.lock.hcl
+=======
+>>>>>>> c5ccb1f9b9499b496f3df2b7b515d6a0c4e1a8c3
 
 # Include override files you do wish to add to version control using negated pattern
 # !example_override.tf
