@@ -1,7 +1,6 @@
 ======================================================================
 **Enterprise Cloud Platform for Scalable E-Commerce Microservices**
-======================================================================
-
+=============================================
 **Executive Summary**
 
 This project delivers a production-ready cloud platform designed to help a retail client deploy, scale, and operate a modern microservices-based e-commerce application securely and reliably on AWS.
