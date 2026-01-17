@@ -1,7 +1,7 @@
-<<<<<<< HEAD
-# 1st-december-sock-shop-kubernetes-project-using-ansible
-=======
+======================================================================
 **Enterprise Cloud Platform for Scalable E-Commerce Microservices**
+======================================================================
+
 **Executive Summary**
 
 This project delivers a production-ready cloud platform designed to help a retail client deploy, scale, and operate a modern microservices-based e-commerce application securely and reliably on AWS.
@@ -25,7 +25,8 @@ Scale without manual intervention(still been looked into, but much more along th
 
 Traditional monolithic architectures and manual deployments were unable to meet these requirements reliably.
 
-**#*****************************************************************************************************************#**
+**#*******************************************************************************************#**
+
 **Solution Overview**
 
 This platform implements a highly available, automated, and secure cloud architecture using Infrastructure as Code, CI/CD pipelines, and Kubernetes orchestration.
@@ -40,7 +41,7 @@ Self-healing application workloads
 
 Built-in scalability and fault tolerance
 
-**a***********************************************************************************************************************a**
+**a*****************************************************************************************************a**
 
 **High-Level Architecture**
 
