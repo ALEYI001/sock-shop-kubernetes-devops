@@ -5,11 +5,6 @@ pipeline {
         terraform 'terraform'
     }
 
-    environment {
-        AWS_ACCESS_KEY_ID     = credentials('aws-sock-shop')     // ← Injects key
-        AWS_SECRET_ACCESS_KEY = credentials('aws-sock-shop')     // ← Injects secret
-        AWS_DEFAULT_REGION    = 'us-east-1'
-    }
 
     parameters {
         choice(name: 'action', choices: ['apply', 'destroy'], description: 'Select the action to perform')
@@ -20,6 +15,9 @@ pipeline {
     }
 
     environment {
+        AWS_ACCESS_KEY_ID     = credentials('aws-sock-shop')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-sock-shop')
+        AWS_DEFAULT_REGION    = 'us-east-1'
         SLACKCHANNEL = '1st-december-sock-shop-kubernetes-project-using-ansible'
         SLACKCREDENTIALS = credentials('slack')
     }
