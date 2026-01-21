@@ -54,14 +54,14 @@ pipeline {
 
         stage('Terraform Plan') {
             steps {
-                sh 'terraform plan '
+                sh 'terraform plan -lock=false'
             }
         }
 
         stage('Terraform Action') {
             steps {
                 script {
-                    sh "terraform ${params.action} -auto-approve "
+                    sh "terraform ${params.action} -auto-approve -lock=false"
                 }
             }
         }
