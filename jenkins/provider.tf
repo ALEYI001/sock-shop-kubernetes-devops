@@ -5,7 +5,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket       = "sock-shop-team33"
+    bucket       = "sock-shop-teamz33"
     key          = "jenkins/terraform.tfstate"
     region       = "us-east-1"
     profile      = "sock_shop"
