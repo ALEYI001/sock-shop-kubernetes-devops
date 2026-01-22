@@ -4,13 +4,13 @@ variable "region" {
 
 #domain
 variable "domain_name" {
-  default = "work-experience2025.buzz"
+  default = "aleyi.space"
 }
 
 variable "newrelic_api_key" {
-  default = "NRAK-V5EJ7RVCNJLCQ3NM52B4P79DJ2L"
+  default = "NRAK-HM7WE8XXY3PAZR5LBG2AHC22PYH"
 }
 
 variable "newrelic_account_id" {
-  default = "6853055"
+  default = "7233367"
 }
