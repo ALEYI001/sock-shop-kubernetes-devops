@@ -1,6 +1,7 @@
-## ======================================================================
+<<<<<<< HEAD
+# 1st-december-sock-shop-kubernetes-project-using-ansible
+=======
 **Enterprise Cloud Platform for Scalable E-Commerce Microservices**
-
 **Executive Summary**
 
 This project delivers a production-ready cloud platform designed to help a retail client deploy, scale, and operate a modern microservices-based e-commerce application securely and reliably on AWS.
@@ -24,8 +25,7 @@ Scale without manual intervention(still been looked into, but much more along th
 
 Traditional monolithic architectures and manual deployments were unable to meet these requirements reliably.
 
-## ***********************************************************************************************
-
+**#*****************************************************************************************************************#**
 **Solution Overview**
 
 This platform implements a highly available, automated, and secure cloud architecture using Infrastructure as Code, CI/CD pipelines, and Kubernetes orchestration.
@@ -40,7 +40,7 @@ Self-healing application workloads
 
 Built-in scalability and fault tolerance
 
-*********************************************************************************************
+**a***********************************************************************************************************************a**
 
 **High-Level Architecture**
 
@@ -62,11 +62,8 @@ Ansible for configuration management
 
 Jenkins for CI/CD automation
 
-Checkov for IaC scan
-
 OWASP ZAP for security validation
-
-## ***********************************************************************************
+**a*******************************************************************************a**
 
 **Platform Capabilities**
 
@@ -79,6 +76,10 @@ Automatic HAProxy failover using a Virtual IP
 Kubernetes self-healing for pods and nodes
 
 **_Scalability_**
+
+Auto Scaling Groups respond to traffic spikes
+
+Kubernetes horizontal scaling for microservices
 
 Load balancing at multiple layers
 
@@ -153,8 +154,112 @@ Future-ready platform capable of growth
 
 
 
-## Techinical Overview
-This is a clients end-to-end DevOps implementation for deploying
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Sock Shop Microservices – AWS DevOps Project
+
+## Overview
+This project demonstrates an end-to-end DevOps implementation for deploying
 a microservices-based application on AWS using Terraform, Ansible, Jenkins,
 and Kubernetes.
 
@@ -165,13 +270,13 @@ and Kubernetes.
 - CI/CD pipeline using Jenkins
 - Infrastructure provisioned using Terraform
 
-[Architecture Diagram]https://files.slack.com/files-pri/T01H25CT2G0-F0A5KK0LA48/image.png
+![Architecture Diagram](architecture/architecture-diagram.png)
 
-## Core Technologies Used
+## Technologies Used
 - AWS (EC2, VPC, ALB, ASG, S3)
 - Terraform
 - Ansible
-- Jenkins & its plugins
+- Jenkins
 - Kubernetes
 - Docker / containerd
 - HAProxy & Keepalived
@@ -191,12 +296,6 @@ See the folder structure above for clear separation of concerns:
 4. Deploy Sock Shop microservices
 5. Access application via Load Balancer
 
-## Future deployment improvements
-1.  Auto scaling group considerations: Kubernetes HA-scaling for microservices and or KEDA
-2.  Multi-cloud deployment
-3.  multi-pipeline deployment
-4.  multi-region deployment
-
 ## Author
 Inalegwu J Aleyi
->>>>>>> 
+>>>>>>> c5ccb1f9b9499b496f3df2b7b515d6a0c4e1a8c3

@@ -76,7 +76,6 @@ resource "aws_route_table_association" "public_assoc" {
 resource "aws_iam_role" "instance_role" {
   name               = "${local.name}-Jenkins-role"
   assume_role_policy = data.aws_iam_policy_document.ec2_assume_role.json
-
 }
 
 data "aws_iam_policy_document" "ec2_assume_role" {
@@ -103,7 +102,7 @@ resource "aws_iam_role_policy_attachment" "admin_attach" {
 
 # Attach role to Jenkins instance profile
 resource "aws_iam_instance_profile" "jenkins_instance_profile" {
-  name = "utility2-Jenkins-role"
+  name = "${local.name}-Jenkins-profile"
   role = aws_iam_role.instance_role.name
 }
 

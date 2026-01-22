@@ -7,11 +7,11 @@ variable "region" {
 variable "domain_name" {
   type        = string
   description = "The domain name for the load balancer"
-  default = "aleyi.space"
+  default = "work-experience2025.buzz"
 }
 
 variable "s3_bucket_name" {
   type        = string
   description = "The name of the S3 bucket for Ansible"
-  default     = "sock-shop-bkt-aleyi"
+  default     = "sock-shop-team33"
 }
