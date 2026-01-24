@@ -2,7 +2,7 @@
 set -euo pipefail  # Enable strict error handling
 
 # Set Variables
-BUCKET_NAME="sock-shop-team33"
+BUCKET_NAME="sock-shop-teamz33"
 AWS_REGION="us-east-1"
 PROFILE="sock_shop"
 
