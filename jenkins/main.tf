@@ -20,7 +20,7 @@ resource "tls_private_key" "keypair" {
 
 # Create a new key pair using the AWS provider
 resource "aws_key_pair" "public_key" {
-  key_name   = "${local.name}-keypair"
+  key_name   = "${local.name}-keypair1"
   public_key = tls_private_key.keypair.public_key_openssh
 }
 
@@ -102,8 +102,9 @@ resource "aws_iam_role_policy_attachment" "admin_attach" {
 
 # Attach role to Jenkins instance profile
 resource "aws_iam_instance_profile" "jenkins_instance_profile" {
-  name = "${local.name}-Jenkins-profile"
+  name = "${local.name}-Jenkins-profile1"
   role = aws_iam_role.instance_role.name
+
 }
 
 #Security group for jenkins
