@@ -19,7 +19,7 @@ resource "aws_security_group" "bastion_sg" {
 
 # IAM Role 
 resource "aws_iam_role" "bastion_role" {
-  name = "${var.name}-bastion-role"
+  name = "${var.name}-bastion-role1"
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
