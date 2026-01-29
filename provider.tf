@@ -1,6 +1,6 @@
 provider "aws" {
   region  = "us-east-1"
-  profile = "sock_shop"
+  #profile = "sock_shop"
 }
 
 terraform {
@@ -8,7 +8,7 @@ terraform {
     bucket       = "sock-shop-teamz33"
     key          = "infrastructure/terraform.tfstate"
     region       = "us-east-1"
-    profile      = "sock_shop"
+    #profile      = "sock_shop"
     encrypt      = true
     use_lockfile = true
   }
