@@ -20,7 +20,7 @@ resource "tls_private_key" "keypair" {
 
 # Create a new key pair using the AWS provider
 resource "aws_key_pair" "public_key" {
-  key_name   = "${local.name}-keypair1"
+  key_name   = "${local.name}-keypair11"
   public_key = tls_private_key.keypair.public_key_openssh
 }
 

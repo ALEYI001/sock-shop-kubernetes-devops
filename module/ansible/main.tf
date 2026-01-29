@@ -78,7 +78,7 @@ resource "aws_instance" "ansible_server" {
 
 # IAM Role for Ansible
 resource "aws_iam_role" "ansible_role" {
-  name = "${var.name}-ansible-role"
+  name = "${var.name}-ansible-role11"
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
