@@ -1,6 +1,7 @@
 <<<<<<< HEAD
-# 1st-december-sock-shop-kubernetes-project-using-ansible
-=======
+#Sock-Shop-Kubernetes-Project-Using-Ansible
+#Detailing The Business and Technical Overview
+
 **Enterprise Cloud Platform for Scalable E-Commerce Microservices**
 **Executive Summary**
 
@@ -25,7 +26,7 @@ Scale without manual intervention(still been looked into, but much more along th
 
 Traditional monolithic architectures and manual deployments were unable to meet these requirements reliably.
 
-**#*****************************************************************************************************************#**
+******************************************************************************************************************
 **Solution Overview**
 
 This platform implements a highly available, automated, and secure cloud architecture using Infrastructure as Code, CI/CD pipelines, and Kubernetes orchestration.
@@ -38,9 +39,9 @@ Automated infrastructure provisioning
 
 Self-healing application workloads
 
-Built-in scalability and fault tolerance
+Built-in availability and fault tolerance
 
-**a***********************************************************************************************************************a**
+***************************************************************************************************************************
 
 **High-Level Architecture**
 
@@ -62,8 +63,10 @@ Ansible for configuration management
 
 Jenkins for CI/CD automation
 
+Chekov for vulnerabilities and misconfigurations scan
+
 OWASP ZAP for security validation
-**a*******************************************************************************a**
+***********************************************************************************
 
 **Platform Capabilities**
 
@@ -76,12 +79,9 @@ Automatic HAProxy failover using a Virtual IP
 Kubernetes self-healing for pods and nodes
 
 **_Scalability_**
+_NOTE:_ The current architecture is scalability-capable, but only sparingly scalability-implemented.
 
-Auto Scaling Groups respond to traffic spikes
-
-Kubernetes horizontal scaling for microservices
-
-Load balancing at multiple layers
+That is, at present, scalability is enabled at the Kubernetes application layer through replication and load balancing at multiple layer. However, automatic scaling requires explicit configuration via Horizontal Pod Autoscalers and node autoscaling, which can be activated using Kubernetes metrics and AWS Auto Scaling Groups. This demonstrates a scalable-ready design, with clear extension points for full elasticity. Particularly, with the full monitoring and observability implemented via Prometheus and Grafana, the best bet for auto-scaloing may just be _*KEDA*_.
 
 **_Security_**
 
@@ -101,7 +101,7 @@ CI/CD pipelines for build, test, and deployment
 
 Environment consistency across deployments
 
-**a********************************************************************************************a**
+************************************************************************************************
 
 **_Deployment Workflow (Client View)_**
 
@@ -131,134 +131,7 @@ Future-ready platform capable of growth
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Sock Shop Microservices – AWS DevOps Project
-
-## Overview
+## Techical Overview and project flow chart
 This project demonstrates an end-to-end DevOps implementation for deploying
 a microservices-based application on AWS using Terraform, Ansible, Jenkins,
 and Kubernetes.
@@ -270,7 +143,7 @@ and Kubernetes.
 - CI/CD pipeline using Jenkins
 - Infrastructure provisioned using Terraform
 
-![Architecture Diagram](architecture/architecture-diagram.png)
+![Architecture Diagram]: https://cloudhight.slack.com/files/U09E0QBCTKQ/F0A5KK0LA48/image.png
 
 ## Technologies Used
 - AWS (EC2, VPC, ALB, ASG, S3)
@@ -298,4 +171,4 @@ See the folder structure above for clear separation of concerns:
 
 ## Author
 Inalegwu J Aleyi
->>>>>>> c5ccb1f9b9499b496f3df2b7b515d6a0c4e1a8c3
+>>>>>>>
