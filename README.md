@@ -154,6 +154,11 @@ and Kubernetes.
 - Docker / containerd
 - HAProxy & Keepalived
 
+## Justification For Architectural Design
+For a justification for the architectural design view below:
+[![PDF](https://img.shields.io/badge/Documentation-PDF-red)](./docs/Architecture%20Justification%20Document.pdf)
+
+
 ## Repository Structure
 See the folder structure above for clear separation of concerns:
 - terraform/ – Infrastructure provisioning
