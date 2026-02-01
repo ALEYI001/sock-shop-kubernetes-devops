@@ -156,7 +156,7 @@ and Kubernetes.
 
 ## Justification For Architectural Design
 For a justification for the architectural design view below:
-[![PDF](https://img.shields.io/badge/Documentation-PDF-red)](./docs/Architecture Justification Document.pdf)
+[![PDF](https://img.shields.io/badge/Documentation-PDF-red)](./docs/Architecture%20Justification%20Document.pdf)
 
 
 ## Repository Structure
