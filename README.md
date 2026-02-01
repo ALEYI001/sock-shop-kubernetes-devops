@@ -156,8 +156,7 @@ and Kubernetes.
 
 ## Justification For Architectural Design
 For a justification for the architectural design view below:
-[![PDF](https://img.shields.io/badge/Documentation-PDF-red)](./docs/Architecture%20Justification%20Document.pdf)
-
+[![Word Doc](https://img.shields.io/badge/Documentation-Word-blue)](./docs/Architecture%20Justification%20Document.docx)
 
 ## Repository Structure
 See the folder structure above for clear separation of concerns:
@@ -173,6 +172,10 @@ See the folder structure above for clear separation of concerns:
 3. Bootstrap Kubernetes cluster
 4. Deploy Sock Shop microservices
 5. Access application via Load Balancer
+
+## Challenges and Solutions
+To see challenges encountered and solutions proferred, click link below:
+[![Word Doc](https://img.shields.io/badge/Documentation-Word-blue)](./docs/Final%20Project%20Challenges%20and%20Solutions.docx)
 
 ## Author
 Inalegwu J Aleyi
