@@ -155,7 +155,9 @@ and Kubernetes.
 - HAProxy & Keepalived
 
 ## Justification For Architectural Design
-For a justification for the architectural design view below:
+To view the documentation on justification for the architectural design view below: the word document requires a download whilst the pdf can be viewed direclty
+[![PDF](https://img.shields.io/badge/Documentation-PDF-red)](./docs/Architecture%20Justification%20Document.pdf)
+
 [![Word Doc](https://img.shields.io/badge/Documentation-Word-blue)](./docs/Architecture%20Justification%20Document.docx)
 
 ## Repository Structure
@@ -174,7 +176,9 @@ See the folder structure above for clear separation of concerns:
 5. Access application via Load Balancer
 
 ## Challenges and Solutions
-To see challenges encountered and solutions proferred, click link below:
+To view the documentation of the challenges encountered and solutions proferred, click link below:the word document requires a download whilst the pdf can be viewed direclty
+[![Word Doc](https://img.shields.io/badge/Documentation-PDF-red)](./docs/Final%20Project%20Challenges%20and%20Solutions.pdf)
+
 [![Word Doc](https://img.shields.io/badge/Documentation-Word-blue)](./docs/Final%20Project%20Challenges%20and%20Solutions.docx)
 
 ## Author
