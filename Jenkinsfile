@@ -53,7 +53,7 @@ pipeline {
             steps {
                 // We use -lock=false here to prevent the build from failing 
         // if another developer is currently running a plan/apply.
-                sh 'terraform plan -lock=false'
+                sh 'terraform plan'
             }
         }
 
@@ -62,7 +62,7 @@ pipeline {
                 script {
                     // We use -lock=false here to prevent the build from failing 
         // if another developer is currently running a plan/apply.
-                    sh "terraform ${params.action} -auto-approve -lock=false"
+                    sh "terraform ${params.action} -auto-approve"
                 }
             }
         }
